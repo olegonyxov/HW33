@@ -61,7 +61,7 @@ export default class Voting extends Component {
         )}
 
         <input type="button" value="Show Results" onClick={this.showResults}/> 
-        {this.state.results.length > 0 && (
+        {!!this.state.results.length  && (
           <div>
             <p>Results:</p>
             {this.state.results.map((result, index) => (
