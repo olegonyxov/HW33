@@ -4,7 +4,8 @@ import './Voting.css';
 
 export default class Voting extends Component {
   state = {
-    candidates: []
+    candidates: [],
+    results: []
   };
 
   componentDidMount() {
@@ -29,14 +30,12 @@ export default class Voting extends Component {
     });
   }
   showResults = () => {
-    // our function here
-    this.state.candidates.forEach(function(candidate) {
-      console.log(candidate.counter)
-    })
-
-
+    const results = this.state.candidates.map(candidate => ({
+      name: candidate.name,
+      counter: candidate.counter
+    }));
+    this.setState({ results });
   }
-
 
 
 
@@ -62,6 +61,16 @@ export default class Voting extends Component {
         )}
 
         <input type="button" value="Show Results" onClick={this.showResults}/> 
+        {this.state.results.length > 0 && (
+          <div>
+            <p>Results:</p>
+            {this.state.results.map((result, index) => (
+              <div key={index}>
+                <p>{result.name}:  {result.counter} votes</p>
+              </div>
+            ))}
+          </div>
+        )}
 
       </div>
     )
